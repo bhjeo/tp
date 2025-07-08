@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="description" content="<model-viewer> template">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><model-viewer> template</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <!-- Load model-viewer library first -->
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+    <!-- Then load our script -->
+    <script type="module" src="script.js"></script>
+
+    <model-viewer
+      id="dimension-demo"
+      ar
+      ar-modes="webxr"
+      ar-scale="fixed"
+      camera-orbit="-30deg auto auto"
+      max-camera-orbit="auto 100deg auto"
+      shadow-intensity="1"
+      camera-controls
+      touch-action="pan-y"
+      src="test2.glb"
+      alt="3D model"
+    >
+      <button slot="hotspot-dim+X-Y" class="dim" data-position="1 -1 0" data-normal="1 0 0"></button>
+      <button slot="hotspot-dot+X-Y-Z" class="dot" data-position="1 -1 -1" data-normal="1 0 0"></button>
+      <button slot="hotspot-dim+X-Z" class="dim" data-position="1 0 -1" data-normal="1 0 0"></button>
+      <button slot="hotspot-dot+X+Y-Z" class="dot" data-position="1 1 -1" data-normal="0 1 0"></button>
+      <button slot="hotspot-dim+Y-Z" class="dim" data-position="0 -1 -1" data-normal="0 1 0"></button>
+      <button slot="hotspot-dot-X+Y-Z" class="dot" data-position="-1 1 -1" data-normal="0 1 0"></button>
+      <button slot="hotspot-dim-X-Z" class="dim" data-position="-1 0 -1" data-normal="-1 0 0"></button>
+      <button slot="hotspot-dot-X-Y-Z" class="dot" data-position="-1 -1 -1" data-normal="-1 0 0"></button>
+      <button slot="hotspot-dim-X-Y" class="dim" data-position="-1 -1 0" data-normal="-1 0 0"></button>
+      <button slot="hotspot-dot-X-Y+Z" class="dot" data-position="-1 -1 1" data-normal="-1 0 0"></button>
+      <svg id="dimLines" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" class="dimensionLineContainer">
+        <line class="dimensionLine"></line>
+        <line class="dimensionLine"></line>
+        <line class="dimensionLine"></line>
+        <line class="dimensionLine"></line>
+        <line class="dimensionLine"></line>
+      </svg>
+      <div id="controls" class="dim glass">
+        <label for="show-dimensions">크기:</label>
+          <input id="show-dimensions" type="checkbox" checked="true"><br>
+        <label for="toggle-hotspots">부위 설명 : </label>
+          <input id="toggle-hotspots" type="checkbox">  
+      </div>
+      <button class="Hotspot" slot="hotspot-1" data-position="-0.026285182011548884m -0.021712269662795877m 0.009182866137309731m" data-normal="0.07476185808341651m 0.04997474730659996m 0.9959483868190946m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">등면</div>
+      </button><button class="Hotspot" slot="hotspot-2" data-position="-0.024381051493276136m -0.04978752029821428m 0.009312957313683368m" data-normal="-0.18039672002895038m -0.20809505878587042m 0.9613290123114469m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">슴베부</div>
+      </button><button class="Hotspot" slot="hotspot-3" data-position="-0.02386192056056843m -0.0037347884979394884m 0.004985268879446451m" data-normal="0.7271020544879659m 0.34654699655854293m 0.5926447346730016m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">찌르개부</div>
+      </button>
+      </button><button class="Hotspot" slot="hotspot-4" data-position="-0.02440655500613511m -0.032642341790690595m 0.004393729397793218m" data-normal="-0.04340101566348776m 0.013754367516674564m -0.9989630469710049m" data-visibility-attribute="visible">
+        <div class="HotspotAnnotation">배면 : 때림점이 불룩하고, 위끝은 배면 쪽으로 휨. ▶ 경질 망치 사용 가능성이 높음.</div>
+      </button>
+
+
+      <div class="progress-bar hide" slot="progress-bar">
+        <div class="update-bar"></div>
+      </div>
+      <button slot="ar-button" id="ar-button">
+          View in your space
+      </button>
+      <div id="ar-prompt">
+          <img src="ar_hand_prompt.png">
+      </div>
+    </model-viewer>
+
+    <button id="show-info-btn">유물 설명1</button>
+    <button id="show-info-btn2">유물 설명2</button>
+    <div id="info-modal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>슴베찌르개</h2>
+        <p>- 시대 : 후기 구석기시대<br>
+        - 크기 : 길이 6.3㎝, 너비 2.2㎝, 두께 0.8㎝, 무게 7g<br> 
+        - 암석 : 혼펠스 (hornfels)<br>
+        - 도구 기능 : 짐슴 사냥용 찌르개 / 사냥감 해체용 칼<br>
+        - 도구 제작 방법<br> 
+          1) 입자가 곱고 균질하여 도구 만들기에 좋은 암석을 구함.<br>
+          2) 암석 귀퉁이에서부터 돌망치로 쳐서 길이 10㎝ 이하의 얇은 돌조각을 떼어 냄.<br>
+          3) 돌조각의 두꺼운 부분을 잡을 부분으로, 얇은 부분을 날카로운 찌르개 날로 설정함.<br> 
+          4) 잡을 부분은 날카로운 가장자리를 없애기 위해 직각으로 손질함.<br>
+          5) 찌르개 날은 날카로우면서 뾰족하도록 예각으로 미세하게 손질함.<br>
+          6) 잡을 부분에 나무로 만든 장대 혹은 잡이를 부착하여 도구로 완성함. </p>
+          <img src="use1.JPG" alt="나이프형 석기 사용모습">
+          <img src="use2.JPG" alt="사냥 모습">
+      </div>
+    </div>
+    <div id="info-modal2" class="modal-overlay">
+      <div class="modal-content">
+        <span class="close-btn">&times;</span>
+          <h2>슴베찌르개-나이프형석기</h2>
+           <p>- 시기 : 후기구석기시대 이른 시기<br>
+              - 크기 : 길이 6.3㎝, 너비 2.2㎝, 두께 0.8㎝, 무게 7g<br>
+                (길이지수 2.9 / 두께지수 0.2)<br>
+              - 암석 : 혼펠스 (hornfels)<br>
+              - 밑감 : 돌날<br>
+              - 등면 : 중앙부에 자연면이 남음 ▶ 밑감 떼기 초기 단계에서 나온 격지 사용<br>
+                    : 좌측에 얇게 뗀 3개의 면 ▶ 면 조정을 위한 얇게 떼기<br>
+              - 배면 : 때림점이 불룩하고, 위끝은 배면 쪽으로 휨. ▶ 경질 망치 사용 가능성이 높음. <br>
+              - 슴베부 : 길이 2.2㎝, 두께 0.8㎝, 양옆에 등방향의 가파른 잔손질 ▶ 면 조성됨.<br>
+              - 찌르개부 : 우측에 잔손질 없이 날카로운(41˚) 상태 ▶ 자연날 조성됨.<br>
+                        : 좌측에 등방향의 가파른(71˚) 잔손질 ▶ 면 조성됨.<br>
+              - 기능 해석
+                : 돌날의 두꺼운 굽부 양쪽에 가파른 잔손질로 슴베를, 얇은 위끝부의 왼쪽에만 가파른 잔손질로 면을 조성함. <br>
+                찌르개 몸통부 아래 횡단면은 양쪽 가장자리가 날 상태이나 위쪽 횡단면은 잔손질로 인해 직각 삼각형의 형태를 띰. <br>
+                이로 볼 때 오른쪽 가장자리 날을 효율 높게 사용할 수 있도록 왼쪽에 칼등이 조성된 나이프형석기로 추정됨.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
