@@ -19,20 +19,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const srcSelect = modelViewer.querySelector('#src');
   if (srcSelect) srcSelect.addEventListener('input', (e) => {
     modelViewer.src = e.target.value;
-  });
+});
 
-  // Show/hide dimensions
-  const checkbox = modelViewer.querySelector('#show-dimensions');
-  const dimElements = [...modelViewer.querySelectorAll('button[class*="dim"], svg#dimLines')];
-  const setVisibility = (visible) => {
-    dimElements.forEach(el => el.classList.toggle('hide', !visible));
+// Show/hide dimensions
+const checkbox = modelViewer.querySelector('#show-dimensions');
+const dimElements = [...modelViewer.querySelectorAll('button[class*="dim"], svg#dimLines')];
+const setVisibility = (visible) => {
+  dimElements.forEach(el => el.classList.toggle('hide', !visible));
   };
-  if (checkbox) {
+if (checkbox) {
     checkbox.addEventListener('change', () => setVisibility(checkbox.checked));
     modelViewer.addEventListener('ar-status', (e) => {
       setVisibility(checkbox.checked && e.detail.status !== 'session-started');
     });
-  }
+}
 
   // Draw dimension lines
   const dimLines = modelViewer.querySelectorAll('svg#dimLines line');
@@ -104,25 +104,42 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
  // ── 설명 모달 1,2 토글 설정 ──
-[ ['show-info-btn','info-modal'], ['show-info-btn2','info-modal2'] ].forEach(([btnId, modalId]) => {
+const toggles = [
+  { btnId: 'show-info-btn',  modalId: 'info-modal'  },
+  { btnId: 'show-info-btn2', modalId: 'info-modal2' }
+];
+toggles.forEach(({ btnId, modalId }) => {
   const btn   = document.getElementById(btnId);
   const modal = document.getElementById(modalId);
-  if (!btn || !modal) return;
   const close = modal.querySelector('.close-btn');
-  if (!close) return;
-
-  // 버튼 클릭 → 해당 모달만 토글
+  if (!btn || !modal || !close) return;
   btn.addEventListener('click', () => {
+    // 1) 다른 모달들 모두 닫기
+    toggles.forEach(({ modalId: other }) => {
+      if (other !== modalId) {
+        document.getElementById(other).classList.remove('show');
+      }
+    });
+    // 2) 이 모달만 토글
     modal.classList.toggle('show');
   });
 
-  // × 버튼 클릭 → 해당 모달 닫기
-  close.addEventListener('click', () => {
-    modal.classList.remove('show');
-  });
-
-  // 모달 바깥(overlay) 클릭 → 닫기
+  // 닫기 버튼 & 오버레이 밖 클릭
+  close.addEventListener('click', () => modal.classList.remove('show'));
   modal.addEventListener('click', e => {
     if (e.target === modal) modal.classList.remove('show');
   });
+});
+
+const mv = document.querySelector('#dimension-demo');
+
+mv.addEventListener('load', () => {
+  const dims = mv.getDimensions();
+  const maxDim = Math.max(dims.x, dims.y, dims.z);
+  const fovDeg = mv.getFieldOfView(); 
+  const fovRad = fovDeg * Math.PI / 180;
+  const distance = (maxDim / 2) / Math.tan(fovRad / 2) * 1.1;
+  const {theta, phi, radius: _} = mv.getCameraOrbit();
+  mv.cameraOrbit = `${theta}rad ${phi}rad ${distance}m`;
+  mv.jumpCameraToGoal();
 });
