@@ -261,7 +261,7 @@ model-viewer>#ar-prompt>img {
 }
 
 /* 설명 버튼 */
-#show-info-btn {
+#show-info-btn, #show-info-btn2, #show-info-btn3 {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -273,6 +273,10 @@ model-viewer>#ar-prompt>img {
   cursor: pointer;
   font-weight: bold;
 }
+
+#show-info-btn  { top: 16px; }
+#show-info-btn2 { top: 56px; }
+#show-info-btn3 { top: 96px; } 
 
 /* 팝업 모달 */
 #show-info-btn {
@@ -288,20 +292,7 @@ model-viewer>#ar-prompt>img {
   font-weight: bold;
 }
 
-#show-info-btn2 {
-  position: absolute;
-  top: 56px;
-  right: 16px;
-  z-index: 100;
-  padding: 8px 12px;
-  background: rgba(255,255,255,0.9);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-#info-modal, #info-modal2 {
+#info-modal, #info-modal2, #info-modal3 {
   position: fixed;
   top: 0;
   left: 0;
@@ -317,13 +308,13 @@ model-viewer>#ar-prompt>img {
   transition: opacity 0.3s;
 }
 
-#info-modal.show, #info-modal2.show {
+#info-modal.show, #info-modal2.show, #info-modal3.show {
   visibility: visible;
   opacity: 1;
   pointer-events: auto;
 }
 
-#info-modal .modal-content, #info-modal2 .modal-content {
+#info-modal .modal-content, #info-modal2 .modal-content, #info-modal3 .modal-content {
   background: #fff;
   padding: 16px;
   border-radius: 8px;
@@ -334,7 +325,7 @@ model-viewer>#ar-prompt>img {
   position: relative;
 }
 
-#info-modal .close-btn, #info-modal2 .close-btn {
+#info-modal .close-btn, #info-modal2 .close-btn, #info-modal3 .close-btn  {
   position: absolute;
   top: 8px;
   right: 12px;
@@ -344,26 +335,27 @@ model-viewer>#ar-prompt>img {
   cursor: pointer;
 }
 
-#info-modal img, #info-modal2 img {
+#info-modal img, #info-modal2 img, #info-modal3 img  {
   width: 100%;
   height: auto;
   margin-bottom: 12px;
   border-radius: 4px;
 }
 
-#info-modal h2, #info-modal2 h2 {
+#info-modal h2, #info-modal2 h2, #info-modal3 h2 {
   margin-top: 0;
   margin-bottom: 12px;
   font-size: 1.5rem;
 }
 
-#info-modal p, #info-modal2 p {
+#info-modal p, #info-modal2 p, #info-modal3 p {
   line-height: 1.6;
   color: #333;
 }
 
 #info-modal .modal-content,
-#info-modal2 .modal-content {
+#info-modal2 .modal-content, #info-modal3 .modal-content
+ {
   pointer-events: auto;
   font-size: clamp(8px, 1.2vw, 16px);
 }

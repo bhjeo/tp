@@ -103,10 +103,11 @@ if (checkbox) {
   });
 });
 
- // ── 설명 모달 1,2 토글 설정 ──
+ // ── 모달 1,2,3 토글 설정 ──
 const toggles = [
   { btnId: 'show-info-btn',  modalId: 'info-modal'  },
-  { btnId: 'show-info-btn2', modalId: 'info-modal2' }
+  { btnId: 'show-info-btn2', modalId: 'info-modal2' },
+  { btnId: 'show-info-btn3', modalId: 'info-modal3' }
 ];
 toggles.forEach(({ btnId, modalId }) => {
   const btn   = document.getElementById(btnId);
