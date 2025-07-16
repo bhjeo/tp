@@ -335,7 +335,7 @@ model-viewer>#ar-prompt>img {
   cursor: pointer;
 }
 
-#info-modal img, #info-modal2 img, #info-modal img  {
+#info-modal img, #info-modal2 img, #info-modal3 img  {
   width: 100%;
   height: auto;
   margin-bottom: 12px;
